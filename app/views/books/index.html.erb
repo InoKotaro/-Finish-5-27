@@ -8,44 +8,15 @@
   </ul>
 <% end %>
 
-<!---------------------------------------------------------->
+
 <div class="container">
   <div class="row">
       <div class="col-md-3">
+  <!-----------------------部分テンプレ------------------------------------>
+  <%= render 'list', user: @user, book: @book %>
 
-        <h1>User info</h1>
-
-        <%= image_tag @user.get_profile_image(100,100) %>
-        <table>
-        	<tbody>
-        		<tr>
-        		  <th>name</th>
-        		  <th><%=  @user.name %></th>
-        		</tr>
-        		<tr>
-        		  <th>introduction</th>
-        		  <th><%=  @user.introduction %></th>
-        		</tr>
-        	</tbody>
-        </table>
-
-        <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
-        <% end %>
-
-
-        <h1>New Book</h1>
-        <%= form_with model: @book do |f| %>
-        	<h4>Title</h4>
-            <%= f.text_field :title %>
-          <h4>Opinion</h4>
-            <%= f.text_area :body %>
-            <%= f.submit 'Create Book' %>
-        <% end %>
       </div>
 
-
-  <!------------------------------------------------------------>
       <div class="col-md-8 offset-md-1">
 
         <h1>Books</h1>

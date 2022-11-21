@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, except: []
 
   def create
-
     @book= Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
@@ -49,6 +49,14 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+
+  def authenticate_user
+    user_id = params[:id].to_i
+    login_user_id = current_user.id
+    if(user_id != login_user_id)
+      redirect_to new_user_session_path
+    end
   end
 
 end
