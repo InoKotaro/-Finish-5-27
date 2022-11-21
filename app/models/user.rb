@@ -5,8 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :profile_image
-
   has_many :books, dependent: :destroy
+
+  validates :name, length: { minimum: 2, maximum: 20 }, presence: true
+  validates :introduction, length: { maximum: 50 }
 
 
   def get_profile_image(width, height)
