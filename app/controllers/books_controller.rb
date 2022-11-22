@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: []
+  before_action :test_edit, only:[:upadte, :edit, :destroy]
 
   def create
     @book= Book.new(book_params)
@@ -36,7 +37,6 @@ class BooksController < ApplicationController
       flash[:notice]= "You have created book successfully."
       redirect_to book_path(@book)
     else
-      @book= Book.find(params[:id])
       render :edit
     end
   end
@@ -53,11 +53,10 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body)
   end
 
-  def authenticate_user
-    user_id = params[:id].to_i
-    login_user_id = current_user.id
-    if(user_id != login_user_id)
-      redirect_to new_user_session_path
+  def test_edit
+    @book= Book.find(params[:id])
+    if(@book.user != current_user)
+      redirect_to books_path
     end
   end
 

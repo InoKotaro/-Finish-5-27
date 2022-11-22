@@ -1,6 +1,18 @@
-<div><%= flash[:notice] %></div>
+
 
 <div class="container">
+
+      <div><%= flash[:notice] %></div>
+
+      <% if @book.errors.any? %>
+        <%= @book.errors.count %>error prohibited this obj from being saved:
+            <ul>
+              <% @book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+      <% end %>
+
   <div class="row">
     <div class="col-md-3">
   <!-----------------------部分テンプレ------------------------------------>
