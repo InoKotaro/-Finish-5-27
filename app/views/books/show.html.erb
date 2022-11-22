@@ -23,16 +23,16 @@
             <tbody>
                 <tr>
                     <td>
-                        <%= link_to user_path(@book.user) do %>
-                          <%= image_tag @book.get_image, class:"card-img-top"; %>
-                          <%=  @book.user.name %>
+                        <%= link_to user_path(@book_show.user) do %>
+                          <%= image_tag @book_show.get_image, class:"card-img-top"; %>
+                          <%=  @book_show.user.name %>
                         <% end %>
                     </td>
-                    <td><%= link_to @book.title, book_path(@book), method: :get %></td>
-                    <td><%= @book.body %></td>
+                    <td><%= link_to @book_show.title, book_path(@book_show), method: :get %></td>
+                    <td><%= @book_show.body %></td>
                     <td>
-                        <% if @book.user == current_user %>
-                            <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %>
+                        <% if @book_show.user == current_user %>
+                            <%= link_to "Edit", edit_book_path(@book_show), class: "btn btn-success" %>
                             <%= link_to "Destroy", book_path, class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" %>
                         <% end %>
                     </td>

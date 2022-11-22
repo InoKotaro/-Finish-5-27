@@ -9,6 +9,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book)
     else
       @books= Book.all
+      @user= current_user
       render :index
     end
   end
@@ -20,8 +21,9 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book= Book.find(params[:id])
-    @user= @book.user
+    @book= Book.new
+    @book_show= Book.find(params[:id])
+    @user= @book_show.user
   end
 
   def edit
